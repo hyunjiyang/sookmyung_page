@@ -1,0 +1,30 @@
+<!--http://127.0.0.1:8000/accounts/login/-->
+{% extends 'base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+
+        </head>
+
+        <body style="text-align:center;">
+            <h1 style="margin-top:12%">Login</h1><br>
+            {% if error %}
+                {{ error }}
+            {% endif %}
+
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+
+                Username  <input name="username" type="text" value="">
+                <br><br>
+                Password  <input name="password" type="password" value="">
+                <br><br>
+                <input type="submit" value="로그인"> 
+            </form>
+        </body>
+    </html>
+
+
+{% endblock %}

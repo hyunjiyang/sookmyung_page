@@ -1,0 +1,37 @@
+
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                a{text-decoration:none;color:black; !important}
+
+            </style>
+        </head>
+        {% extends 'base.html' %}
+
+        {% block content %}
+        <body style="text-align: center;">
+            <h2 style="margin-top:12%">숙플레이스</h2>
+
+            <div id="lib_board" style="display:inline-block;width:90%;border-top:2px solid #171717; margin:30px 0 30px 0">
+            <!--글목록-->
+            <div class = "container">
+            {% for sookplace in sookplaces.all %}
+            <br>
+            <div id="Sookplace_link" style="display:inline-block;width:95%;height:50px;border-bottom: 1px solid #848484;">
+                <a href="{% url 'sookplaceapp:sookplace_detail' sookplace.id %}" style="margin-left:-65%;font-weight: bold; font-size: 14pt; color: #1D375F;">{{ sookplace.title }}</a>
+                <span style="float:right;margin-right:30px;color:848484">{{ sookplace.user }} {{ sookplace.date }}</span>
+            </div><br>
+            {% endfor %}
+            </div><br>
+
+            <a style="float:right; margin-right:10%;box-shadow: 1px 1px 3px;border:1px solid;width:80px;height:30px;line-height:30px;display:inline-block;border-radius:5px; " href="{% url 'sookplaceapp:sookplace_register' %}" style="color: #1D375F; font-weight: bold;">글쓰기</a>
+
+            <br>
+
+        </body>
+        {% endblock %}
+    </html>
+
+

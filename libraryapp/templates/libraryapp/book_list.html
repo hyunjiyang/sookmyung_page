@@ -1,0 +1,52 @@
+<!--http://127.0.0.1:8000/library/list/-->
+{% extends 'base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                .container{
+                    text-align: right;
+                    margin-top:10px;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    position: relative;
+                }
+                a{text-decoration:none;color:black; !important}
+            </style>
+        </head>
+
+        <body style="text-align: center;">
+            <h2 style="margin-top:12%">이달의 도서</h2>
+
+            <!--필터링(검색)-->
+            <div class = "container">
+                <form action="{% url 'libraryapp:book_result' %}" method="get">
+                <input type="search" placeholder="책제목을 입력하세요" name="query" style="text-align: center;">
+                <input type="submit" name="" value="검색">
+                </form>
+            </div>
+
+            <div id="lib_board" style="display:inline-block;width:90%;border-top:2px solid #171717; margin:30px 0 30px 0">
+            <!--글 목록-->
+            {% for book in books.all %}
+            <br>
+            <div id="lib_link" style="display:inline-block;width:95%;height:50px;border-bottom: 1px solid #848484;">
+                <a href="{% url 'libraryapp:book_detail' book.id %}" style="margin-left:-65%;font-weight: bold; font-size: 14pt; color: #1D375F;">{{ book.title }}</a>
+                <span style="float:right;margin-right:30px;color:848484">{{ book.author }} {{ book.publisher }}</span>
+            </div>
+            <br>
+            {% endfor %}
+            </div><br>
+
+            <!--superuser에게만 글쓰기 권한 주기-->
+            {% if user.is_superuser %}
+                <a style="float:right; margin-right:10%;box-shadow: 1px 1px 3px;border:1px solid;width:80px;height:30px;line-height:30px;display:inline-block;border-radius:5px; " href="{% url 'libraryapp:book_register' %}">글쓰기</a><br>
+            {% endif %}
+
+        </body>
+    </html>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+<!--http://127.0.0.1:8000/-->
+{% extends 'base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style type="text/css">
+            .keyword{color:gray;font-weight:bold;}
+            .keyword:hover{color:#04dbc9;}
+            #introduce{line-height:20pt;}
+            #ilike {margin-top:60px;line-height:20pt;}
+            #goodat {margin-top:60px;line-height:20pt;}
+            a{text-decoration:none;color:black; !important}
+            #main_img{width:70%;height:500px;overflow:hidden;}
+            </style>
+
+           <script type="text/javascript">
+
+            </script>
+        </head>
+
+        <body style="text-align:center;">
+
+        <div id ="about"style="margin-top:12%"></div>
+      <article>
+         <p class="title" style="font-size:25pt;font-weight:bold;margin-top:50px;">ABOUT US</p>
+         <p id="introduce"> 안녕하세요! <br>
+            서버운영 20조 홈페이지에 오신 것을 환영합니다.<br>저희는 숙명여대생에게 가장 적합한 <b>교내정보</b>와
+<b>교외정보</b>를<br> 한번에 볼 수 있는 '편리한 플렛폼'을 제공합니다.
+</p>
+
+      </article>
+      <article>
+            <p id="ilike"><em style="font-weight:bold; font-size:15pt;">"Development Environment"</em></br><br/>
+                    <span class="keyword">Linux/Django/AWS</span><br><br>
+                    <span class="keyword">HTML/CSS/Javascript/PHP</span><br><br>도서자료 검색 및 , 학교 주변 맛집 정보, 학교 주변 교통 정보 등을 알 수 있습니다.</p>
+
+
+        <span><a style="box-shadow: 1px 1px 3px;border:1px solid;width:120px;height:30px;line-height:30px;display:inline-block;border-radius:5px;"  href="main/list/">학교 공지사항</a></span>
+        </body>
+    </html>
+
+
+{% endblock %}

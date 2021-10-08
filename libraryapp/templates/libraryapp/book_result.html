@@ -1,0 +1,50 @@
+<!--http://127.0.0.1:8000/library/result/?query=test-->
+<!--query= 뒤에 있는 단어가 검색 단어 (위의 경우는 test를 검색한것)-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                .container{
+                    text-align: right;
+                    margin-top:10px;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    position: relative;
+                }
+                a{text-decoration:none;color:black; !important}
+            </style>
+        </head>
+
+        <body style="text-align: center;">
+            <h2 style="margin-top:12%">검색결과</h2>
+
+            <!--필터링(검색)-->
+            <div class = "container">
+                <form action="{% url 'libraryapp:book_result' %}" method="get">
+                <input type="search" placeholder="책제목을 입력하세요" name="query" style="text-align: center;">
+                <input type="submit" name="" value="검색">
+                </form>
+            </div>
+
+            <div id="lib_board" style="display:inline-block;width:90%;border-top:2px solid #171717; margin:30px 0 30px 0">
+            <!--검색 결과-->
+            {% for result in result.all %}
+            <br>
+            <div id="lib_link" style="display:inline-block;width:95%;height:50px;border-bottom: 1px solid #848484;">
+                <a href="{% url 'libraryapp:book_detail' result.id %}" style="margin-left:-65%;font-weight: bold; font-size: 14pt; color: #1D375F;">{{ result.title }}</a>
+                <span style="float:right;margin-right:30px;color:848484">{{ result.author }} {{ result.publisher }}</span>
+            </div><br>
+                {% endfor %}
+            </div><br>
+
+
+
+        </body>
+    </html>
+
+
+{% endblock %}

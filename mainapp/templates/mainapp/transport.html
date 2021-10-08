@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .contents{
+                margin:50px;
+                margin-top: 100px;
+                text-align: center;
+            }
+            .up{
+                width:90%;
+                height:400px;
+                margin:auto;
+                margin-top: 80px;
+                text-align:center;
+            }
+            .down{
+                width:60%;
+                height:400px;
+                margin:auto;
+                text-align:center;
+            }
+        </style>
+
+    </head>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <body>
+        <div class="contents">
+            <h2>버스 도착 정보</h2> 
+            <div id="notice_board" style="display:inline-block;width:90%;border-top:2px solid #171717; margin:30px 0 30px 0">
+
+                <table class="up">
+                    <tr>
+                        <td>
+                            <div>
+                                <h4>숙명여대 도서관 앞</h4>
+                                <img   width="250" src="https://postfiles.pstatic.net/MjAxOTEyMTlfMjE1/MDAxNTc2NzM1NjE2OTY5.PI8rAJYFX7xXRzN-oCsYT-2A1cYrNvuZqDHgEBJnQxog.V4Fvk3oGGGsA8o0Oui6rJbdzEW7T_1G7kr6lbvKUXO4g.JPEG.3jine33/KakaoTalk_20191219_150352795.jpg?type=w773"><br>
+                                <br>
+                                용산04 : {{ ys04_smlibrary }} <br>
+                                400번 : {{ bus400_u_smlibrary }}<br>
+                            </div>
+                        </td>    
+                            
+                            
+
+
+                        <td>
+                            <div>
+                                <h4>숙명여대 정문</h4>
+                                <img   width="250" src="https://postfiles.pstatic.net/MjAxOTEyMTlfMjA4/MDAxNTc2NzM1NjE2OTg3.FizGBCGMYGz72q6CuXoqaLbkLrzksbSMtX9vXEeoHw8g.zn2pc78wvsjtN-U280SvqUMPptaDnsLR_kRHYGrJ5HYg.JPEG.3jine33/KakaoTalk_20191219_150352795_03.jpg?type=w773"><br>
+                                <br>
+                                용산04 : {{ ys04_smfrontdoor }}<br>
+                                400번 : {{ bus400_u_smfrontdoor }}<br>
+                            </div>
+                        </td>
+
+                            
+
+                        <td>
+                            <div>
+                                <h4>숙명여대 후문</h4>
+                                <img   width="250" src="https://postfiles.pstatic.net/MjAxOTEyMTlfOTIg/MDAxNTc2NzM1NjE3MDA0.p7ha5CQslHfrLqNCMxd9ZPJWdlq02ziw7hbCuIVXlM0g.bpJ63-uczv4ysS6HPzznsd5fZ9Kkdzxd26yI_vUMzSYg.JPEG.3jine33/KakaoTalk_20191219_150352795_02.jpg?type=w773"><br>
+                                <br>
+                                용산04 : {{ ys04_smbackgate }}<br>
+                                400번 : {{ bus400_u_smbackgate }}<br>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                
+                <table class="down">
+                    <tr>
+                        <td>
+                            <div>
+                                <h4>숙명여대 정문</h4>
+                                <img   width="250" src="https://postfiles.pstatic.net/MjAxOTEyMTlfNTYg/MDAxNTc2NzM1NjE2OTgz.Gd7ZjjSRESa8eKwH_c67UBoP2aH2SMSh_5lZwzc5BFQg.dTi1q3XAznwQMp7nL2Epe_yS_-Nlpy_s3H0Hmw8AXmAg.JPEG.3jine33/KakaoTalk_20191219_150352795_01.jpg?type=w773"><br>
+                                <br>
+                                400번 : {{  bus400_d_smfrontdoor }}<br>
+                            </div>
+                        </td>
+
+                        <td>
+                            
+                            
+                            <div>
+                                <h4>숙명여대 도서관 앞</h4>
+                                <img   width="250" src="https://postfiles.pstatic.net/MjAxOTEyMTlfMTUy/MDAxNTc2NzM1NjE3MDE0.0qs9uP-j6eHCHIxklqN89bz-7nWFF-X-NLy_Cn-R-4kg.CH_Hen4hswb8qtPV0DNO_18QTRLJ4Kg-i_kuRfdKl4sg.JPEG.3jine33/KakaoTalk_20191219_150352795_04.jpg?type=w773"><br>
+                                <br>
+                                400번 : {{ bus400_d_smlibrary }}<br>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        {% endblock %} 
+    </body>
+</html>

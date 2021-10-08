@@ -1,0 +1,24 @@
+<!--http://127.0.0.1:8000/main/register/-->
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+
+        </head>
+
+        <body>
+            {% extends 'base.html' %}
+
+            {% block content %}
+            <h1>notice_register.html</h1>
+            <form method="POST">
+                {% csrf_token %}
+                제목 : {{ form.title }} <br>   <!--title 입력 폼-->
+
+                <input type="submit" value="등록">
+            </form>
+        </body>
+    </html>
+
+
+{% endblock %}

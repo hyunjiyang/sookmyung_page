@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous" ></script>
+    <style>
+        .container{
+            text-align: center;
+            margin-top:60px;
+            vertical-align: middle;
+            white-space: nowrap;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body style="text-align: center;">
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <p style="font-weight:bold; font-size: 20px">날씨검색 <input id="city" placeholder="도시명을 입력하세요" style="text-align: center;"></input>
+        <button id="getWeatherForcast" style="font-weight:bold; font-family:sans-serif">GET WEATHER</button></p>
+<div class="ShowWeatherForcast"></div>
+</div>
+<script type="text/javascript">
+   $(document).ready(function(){
+      $("#getWeatherForcast").click(function(){
+      var city = $("#city").val();
+      var key  = '3ba2d171606d0102d383b2a52fd76475';
+      $.ajax({
+              url:'http://api.openweathermap.org/data/2.5/weather',
+              dataType:'json',
+              type:'GET',
+              data:{q:city, appid: key, units: 'metric'},
+
+              success: function(data){
+                var wf = '';
+                $.each(data.weather, function(index, val){
+
+                  wf += '<p><b>' + data.name + "</b></p>"+
+                  data.main.temp + '&deg;C ' +
+                  ' | ' + val.main + ", " + val.description
+
+                });
+
+               $(".ShowWeatherForcast").html(wf);
+              },
+                error:function(){
+              }
+            });
+
+      });
+    });
+  </script>
+
+
+{% endblock %}
+</body>
+</html>

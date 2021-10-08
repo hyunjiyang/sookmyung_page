@@ -1,0 +1,120 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<head>
+    <style type="text/css">
+        /*네비게이션*/
+        #list{
+        margin:0;
+        top:0;
+        width:100%;
+        background-color:#003087!important;
+        opacity:0.9;
+        font-size:16px;
+        z-index:200;
+        position:fixed;
+        }
+
+
+        .nav-item{
+        margin: 20px 0px 20px 0px;
+        padding:0px;
+        color : white;
+        text-align:center;
+        width:150px;}
+        /*글씨색 변경*/
+
+
+
+        /*메인메뉴에 마우스 올리면 보이는 효과*/
+        .navbar li:hover .nav-link{
+        transition:all .5s ease;/*지연효과*/
+        background-color:#0056b3;
+        }
+
+        footer{
+        margin-top: 150px;
+        padding-top:50px;
+        padding-bottom:64px;
+        background-color:#262523;
+        width:100%;
+        color:#a1a1a1;
+        font-size: 10pt;
+        }
+
+        .nav .navbar-nav{
+        padding-top:0;
+        }
+        .nav-item .dropdown{
+        padding-top:0 !important;
+
+        }
+
+    </style>
+</head>
+
+<!--상단바-->
+
+<nav class="navbar navbar-expand-sm bg-light" id="list" >
+    <div class="collapse navbar-collapse" id="navbarNav"  >
+        <a class="navbar-brand" href="{% url 'home' %}" style="color:White" id="navi">SookMyung</a>
+  <!--      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>-->
+
+        <div style="text-align:left;width:60%">
+        <ul class="navbar-nav" >
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'mainapp:notice_list' %}" style="color:white">공지사항<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'libraryapp:book_list' %}" style="color:white">도서관</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'sookplaceapp:sookplace_list' %}" style="color:white">숙플레이스</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'mainapp:weather' %}" style="color:white">날씨정보<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'mainapp:transport' %}" style="color:white">교통정보<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        </div>
+
+        <div style="text-align:right;width:30%">
+        <ul class="nav navbar-nav" style="display:inline-block;">
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown"style="display:text-align:right">
+                <a class="nav-link dropdown-toggle" style="color:white; font-size:1rem;display:inline-block;line-height:1em;" id="navbarDropdown " role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">환영합니다.<br> {{ user.username }} 님!</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" style="color:rgb(26, 21, 21)" href="javascript:{document.getElementById('logout').submit()}">로그아웃</a>
+                    <form id="logout" method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="hidden" />
+                    </form>
+                </div>
+            </li>
+            {% else %}
+            <li class="nav-item" style="display:inline-block"><a href="{% url 'signup' %}" class="nav-link" style="color:white">회원가입</a></li>
+            <li class="nav-item" style="display:inline-block "><a href="{% url 'login' %}" class="nav-link" style="color:white">로그인</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    </div>
+</nav>
+<br><br><br>
+
+{% block content %}
+{% endblock %}
+
+<footer id="footer" style="text-align:center;">
+         <p> <a href="http://www.sookmyung.ac.kr/" target="_blank" style="text-decoration:none;color:white;">숙명여자대학교 홈페이지</a> |
+                <a href="https://portal.sookmyung.ac.kr/" target="_blank"  style="text-decoration:none;color:white;">숙명포털</a> |
+                <a href="https://snowboard.sookmyung.ac.kr" target="_blank"  style="text-decoration:none;color:white;">스노보드</a> |
+                <a href="http://snowe.sookmyung.ac.kr" target="_blank"  style="text-decoration:none;color:white;">스노위</a></p>
+         <br><br><hr style="width: 90%;" />
+         <p>@2019 ALL RIGHTS RESERVED.</p>
+</footer>

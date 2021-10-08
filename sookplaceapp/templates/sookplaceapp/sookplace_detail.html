@@ -1,0 +1,98 @@
+<!---->
+{% extends 'base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                #map{
+                margin: auto;
+                width: 50%;
+                }
+                a{text-decoration:none;color:black; !important}
+
+            </style>
+
+        </head>
+
+        <body style="text-align:center;">
+            <div style="width:100%;display:inline-block;">
+                <h2 style="margin-top:12%">맛집 리스트</h2>
+                    <div style="display:inline-block;width:90%; height:2px; background-color:#171717; margin:40px 0 60px 0;"></div><br>
+                    <span style="font-size: 20pt;">{{ sookplace.title }}</span><br><br>
+
+                <div style="display:inline-block;width:80%" id="lib_content">
+                    <br>
+                    <img src ="{{ sookplace.photo.url }}" width=200> <br>
+                    <br>
+                    {{ sookplace.date }} <br>
+                    {{ sookplace.address }} <br>
+                    {{ sookplace.detail_addr }} <br>
+                    {{ sookplace.describe }} <br>
+                </div><br>
+
+                <!--다음지도api - 배포시 다음에서 플랫폼 도메인 주소 바꾸기!-->
+                <!--https://developers.kakao.com/apps/367921/settings/general-->
+
+                <div id="map" style="width:200px;height:200px; vertical-align:middle;"></div>
+
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88fef5eac83ce4f2e8d43c348fcb0e0b&libraries=services"></script>
+                <script>
+                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                        mapOption = {
+                            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                            level: 3 // 지도의 확대 레벨
+                        };
+
+                    // 지도를 생성합니다
+                    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+                    // 주소-좌표 변환 객체를 생성합니다
+                    var geocoder = new kakao.maps.services.Geocoder();
+
+                    // 주소로 좌표를 검색합니다
+                    geocoder.addressSearch('{{ sookplace.address }}', function(result, status) {
+
+                        // 정상적으로 검색이 완료됐으면
+                        if (status === kakao.maps.services.Status.OK) {
+
+                            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new kakao.maps.Marker({
+                                map: map,
+                                position: coords
+                            });
+
+                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                            var infowindow = new kakao.maps.InfoWindow({
+                                content: '<div style="width:150px;text-align:center;padding:6px 0;">{{ sookplace.title }}</div>'
+                            });
+                            infowindow.open(map, marker);
+
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+                        }
+                    });
+                </script>
+            </div>
+
+
+
+            <br>
+            <div style="float:right; margin-right:10%;">
+                {% if request.user == sookplace.user %}
+                <a style="margin-right:10px;box-shadow: 1px 1px 3px;border:1px solid;width:80px;height:30px;display:inline-block;border-radius:5px;" href="{% url 'sookplaceapp:sookplace_update' sookplace.id %}">수정하기</a>
+                <a style="box-shadow: 1px 1px 3px;border:1px solid;width:80px;height:30px;display:inline-block;border-radius:5px;" href="{% url 'sookplaceapp:sookplace_delete' sookplace.id %}">삭제하기</a>
+                <a style="box-shadow: 1px 1px 3px;border:1px solid;width:80px;height:30px;display:inline-block;border-radius:5px;" href="{% url 'sookplaceapp:sookplace_list' %}">글 목록</a>
+                {% endif %}
+            </div>
+
+
+        </body>
+    </html>
+
+
+{% endblock %}
+

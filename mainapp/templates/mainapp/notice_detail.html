@@ -1,0 +1,39 @@
+<!--http://127.0.0.1:8000/main/detail/1-->
+<!--맨 끝의 숫자는 게시물 번호!-->
+{% extends 'base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style type="text/css">
+                a{text-decoration:none;color:black; !important}
+
+            </style>
+        </head>
+
+        <body style="text-align:center;">
+        <div style="width:100%;display:inline-block;">
+            <h2 style="margin-top:12%">공지 사항</h2>
+
+            <div style="display:inline-block;width:90%; height:2px; background-color:#171717; margin:40px 0 60px 0;"></div><br>
+            <span style="font-size:20pt;">{{ notice.title }}</span><br> <!--notice게시물 제목-->
+            <span style="display:inline-block;width:80%;text-align:right;margin:20px 0 15px 0;">{{ notice.date }}</span><br> <!--notice게시물 게시날짜-->
+            <div style="display:inline-block;width:80%" id="content">{{ notice.describe }}</div><br> <!--notice게시물 내용-->
+
+            <br>
+            <!--수정하기 버튼-->
+            <!--superuser만 수정버튼 보임-->
+            <div style="float:right; margin-right:10%;">
+            {% if user.is_superuser %}
+                <a style=" margin-right:10px;box-shadow: 1px 1px 3px;border:1px solid;width:80px;height:30px;display:inline-block;border-radius:5px;" href="{% url 'mainapp:notice_update' notice.id %}">수정하기</a>
+                <a style="box-shadow: 1px 1px 3px;border:1px solid;width:80px;height:30px;display:inline-block;border-radius:5px;" href="{% url 'mainapp:notice_delete' notice.id %}">삭제하기</a>
+            {% endif %}
+                </div>
+        </div>
+
+        </body>
+    </html>
+
+
+{% endblock %}

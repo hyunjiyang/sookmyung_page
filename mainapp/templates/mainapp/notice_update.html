@@ -1,0 +1,33 @@
+<!--http://127.0.0.1:8000/main/update/1-->
+<!--맨 끝의 숫자는 게시물 번호!-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style type="text/css">
+                a{text-decoration:none;color:black; !important}
+                #id_title{width:700px;}
+                textarea{resize:none; width:700px;height:250px;}
+            </style>
+        </head>
+
+        <body style="text-align:center;">
+            <h2 style="margin-top:12%">공지 사항 수정</h2>
+            <div id="notice_board" style="display:inline-block;width:90%;border-top:2px solid #171717; margin:30px 0 30px 0">
+                <form style="margin:50px 0 0 0" method="POST">
+                    {% csrf_token %}
+                    <span style="margin-right:10px;">제    목</span>{{ form.title }} <br> <br>  <!--title 입력 폼-->
+                    <span style="display:inline-block;vertical-align:top;margin-right:10px;">내    용</span>{{ form.describe }}<br><br>  <!--describe 입력 폼-->
+    
+                    <input type="submit" value="등록">
+                </form>
+            </div>
+        </body>
+    </html>
+
+
+{% endblock %}

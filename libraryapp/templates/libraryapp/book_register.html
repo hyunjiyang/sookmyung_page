@@ -1,0 +1,37 @@
+<!--http://127.0.0.1:8000/library/register/-->
+{% extends 'base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style type="text/css">
+            #id_title{width:700px;}
+            textarea{resize:none; width:700px;height:250px;}
+                a{text-decoration:none;color:white; !important}
+
+            </style>
+        </head>
+
+        <body style="text-align:center;">
+            <h2 style="margin-top:12%">이달의 도서 등록</h2>
+            <div id="lib_board" style="display:inline-block;width:90%;border-top:2px solid #171717; margin:30px 0 30px 0">
+            <form style="margin:50px 0 10px 0;" method="POST" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <span style="margin-right:10px;">제   목</span> {{ form.title }} <br><br>   <!--title 입력 폼-->
+                <span style="margin-right:10px;">저   자</span> {{ form.author }}
+                <span style="margin-right:10px;">카테고리</span> {{ form.category }}
+                <span style="margin-right:10px;">출 판 사</span> {{ form.publisher }} <br><br>
+                <span style="margin-left:6%;margin-right:10px;">출판년도</span> {{ form.pub_year }}
+                <span style="margin-right:10px;">소장위치</span> {{ form.location }}
+                <span style="margin-right:10px;">사   진</span> {{ form.photo }} <br><br>
+                <span style="display:inline-block;vertical-align:top;margin-right:10px;margin-left:-1%;">책 소 개</span> {{ form.describe }}<br>  <!--describe 입력 폼-->
+                <br>
+                <input type="submit" value="등록">
+            </form>
+            </div>
+        </body>
+    </html>
+
+
+{% endblock %}

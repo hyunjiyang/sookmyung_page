@@ -1,0 +1,45 @@
+<!--http://127.0.0.1:8000/library/detail/1-->
+<!--마지막 숫자는 글번호-->
+{% extends 'base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style type="text/css">
+                a{text-decoration:none;color:black; !important}
+
+            </style>
+        </head>
+
+        <body style="text-align:center;">
+        <div style="width:100%;display:inline-block;">
+            <h2 style="margin-top:12%">이달의 도서</h2>
+                <div style="display:inline-block;width:90%; height:2px; background-color:#171717; margin:40px 0 60px 0;"></div><br>
+                <span style="font-size: 20pt;">{{ book.title }}</span><br><br> <!--책 제목-->
+
+                <div style="display:inline-block;width:80%" id="lib_content">
+                    {{ book.author }}<!--책 저자-->
+                    {{ book.publisher }}<br> <!--책 출판사-->
+                    {{ book.category }} <!--책 카테고리-->
+                    {{ book.pub_year }} <!--책 출판년도-->
+                    {{ book.location }}<br> <!--책 소장위치-->
+                    {{ book.describe }}<br> <!--책 소개--><br>
+                    <img src="{{ book.photo.url }}" width=200><br> <!--책 사진-->
+                </div><br>
+
+            <br>
+            <!--수정하기 버튼-->
+            <!--superuser만 수정버튼 보임-->
+            <div style="float:right; margin-right:10%;">
+                {% if user.is_superuser %}
+                <a style="margin-right:10px;box-shadow: 1px 1px 3px;border:1px solid;width:80px;height:30px;display:inline-block;border-radius:5px;" href="{% url 'libraryapp:book_update' book.id %}">수정하기</a>
+                <a style="box-shadow: 1px 1px 3px;border:1px solid;width:80px;height:30px;display:inline-block;border-radius:5px;" href="{% url 'libraryapp:book_delete' book.id %}">삭제하기</a>
+                {% endif %}
+            </div>
+        </div>
+        </body>
+    </html>
+
+
+{% endblock %}
